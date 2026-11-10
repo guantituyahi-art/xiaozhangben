@@ -7,6 +7,16 @@
 
 纯静态网页，不需要注册账号、不需要服务器、数据只存在你自己的手机浏览器里。
 
+**在线地址（已部署到 GitHub Pages，HTTPS）：**
+
+```
+https://guantituyahi-art.github.io/xiaozhangben/
+```
+
+手机浏览器打开这个网址 → 添加到主屏幕，就能像 App 一样使用。也可以直接扫描二维码：
+
+![小账本二维码](screenshots/qr.png)
+
 ---
 
 ## 功能一览
@@ -45,28 +55,32 @@ http://localhost:8080
 
 > 注意：局域网预览只在电脑开着、且手机和电脑同一 Wi-Fi 时可用，适合测试，不适合日常长期使用。要在手机上真正长期使用，需要把下面这几个文件放到一个网址上（见第二节）。
 
-## 二、放到手机上长期使用（需要先部署）
+## 二、放到手机上长期使用（已部署）
 
-小账本是纯静态文件，可以免费托管。任选一种：
+本项目的公开仓库：<https://github.com/guantituyahi-art/xiaozhangben>
 
-### 方式 A：Netlify Drop（最简单，拖拽上传）
+已经通过 GitHub Pages 发布，手机直接打开上面「在线地址」即可安装。以后修改文件后，推送到 `main` 分支，GitHub Pages 会自动重新发布（约 1 分钟）。
+
+如果你想把同一套代码部署到别的地方，也支持 Netlify / Vercel，见下面备选方式。
+
+### 备选方式 A：Netlify Drop（拖拽上传）
 
 1. 打开 <https://app.netlify.com/drop>，注册/登录一个免费账号；
 2. 把整个 `jizhangqi` 文件夹（或其中的网站文件）拖进去；
 3. 得到一个 `https://xxx.netlify.app` 网址；
 4. 手机浏览器打开这个网址 → 菜单 → **添加到主屏幕 / 安装应用**。
 
-### 方式 B：Vercel
+### 备选方式 B：Vercel
 
 1. 注册/登录 <https://vercel.com>；
 2. 新建项目，上传或关联这个文件夹（Framework 选 Other，Build Command 留空，Output Directory 填 `.`）；
 3. 部署后得到 `https://xxx.vercel.app` 网址，手机同样「添加到主屏幕」。
 
-### 方式 C：GitHub Pages
+### 本次部署：GitHub Pages（已完成）
 
-1. 把文件推到 GitHub 仓库；
-2. 仓库 Settings → Pages → 选择分支根目录；
-3. 用生成的 `https://用户名.github.io/仓库名/` 访问。
+1. 仓库：<https://github.com/guantituyahi-art/xiaozhangben>（公开）；
+2. `main` 分支根目录直接发布，`https_enforced` 已开启；
+3. 推送 `main` 后 GitHub Pages 自动重新发布，通常 1 分钟内生效。
 
 > 建议让电脑上的部署目录保持这些文件在最外层（`index.html` 直接在根目录），这样 `manifest` 和 Service Worker 的路径才正确。
 
