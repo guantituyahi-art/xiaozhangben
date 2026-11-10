@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F5F6FA">
+  <meta name="description" content="小账本：记录 AI 工具、开发与生活开销，管住每月预算。">
+  <title>小账本 · AI 与生活</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="小账本">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar" id="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">账</span>
+        <div class="brand-text"><strong>小账本</strong><span>AI 与生活</span></div>
+      </div>
+      <div class="month-nav" role="group" aria-label="切换月份">
+        <button class="month-arrow" data-action="prev-month" aria-label="上个月">‹</button>
+        <button class="month-label" id="monthLabel" data-action="this-month" title="回到本月">2026年11月</button>
+        <button class="month-arrow" data-action="next-month" id="nextMonthBtn" aria-label="下个月">›</button>
+      </div>
+    </header>
+
+    <main class="main" id="main">
+      <section class="view" id="view-home" aria-label="记账"></section>
+      <section class="view" id="view-list" aria-label="明细" hidden></section>
+      <section class="view" id="view-stats" aria-label="统计" hidden></section>
+      <section class="view" id="view-settings" aria-label="设置" hidden></section>
+    </main>
+
+    <nav class="tabbar" aria-label="主导航">
+      <button class="tab is-active" data-tab="home" aria-label="记账">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+        <span>记账</span>
+      </button>
+      <button class="tab" data-tab="list" aria-label="明细">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>
+        <span>明细</span>
+      </button>
+      <button class="tab" data-tab="stats" aria-label="统计">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-7M12 20V4M19 20v-4"/></svg>
+        <span>统计</span>
+      </button>
+      <button class="tab" data-tab="settings" aria-label="设置">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 8h6M17 16h6"/></svg>
+        <span>设置</span>
+      </button>
+    </nav>
+  </div>
+
+  <dialog class="sheet" id="editDialog" aria-label="编辑记录"></dialog>
+  <dialog class="confirm-sheet" id="confirmDialog" aria-label="确认操作"></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
