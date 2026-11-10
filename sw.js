@@ -1,5 +1,5 @@
 /* 小账本 Service Worker：联网优先，离线回退缓存 */
-const CACHE_NAME = 'xiaozhangben-v1.0.2';
+const CACHE_NAME = 'xiaozhangben-v1.0.3';
 const ASSETS = [
   './',
   './index.html',

@@ -5,7 +5,7 @@
      常量与数据模型
      ========================================================= */
   const STORE_KEY = 'xiaozhangben.v1';
-  const APP_VERSION = '1.0.2';
+  const APP_VERSION = '1.0.3';
 
   const GROUPS = {
     ai: { key: 'ai', name: 'AI / 开发', color: '#5B5BD6', soft: '#EEF0FF' },
