@@ -6,6 +6,7 @@
      ========================================================= */
   const STORE_KEY = 'xiaozhangben.v1';
   const APP_VERSION = '1.0.3';
+  const isAndroidApp = Boolean(window.AndroidBridge && typeof window.AndroidBridge.saveFile === 'function');
 
   const GROUPS = {
     ai: { key: 'ai', name: 'AI / 开发', color: '#5B5BD6', soft: '#EEF0FF' },
@@ -519,7 +520,7 @@
 
       <section class="card">
         <h2 class="card-title">数据</h2>
-        <p class="card-sub">数据只保存在这台手机的浏览器里。换手机或清理浏览器数据前，先导出备份。</p>
+        <p class="card-sub">数据只保存在这台手机的${isAndroidApp ? ' App 存储' : '浏览器'}里。换手机或清理数据前，先导出备份。</p>
         <div class="btn-list">
           <button type="button" class="ghost-btn" data-action="export-json">导出备份文件（.json）</button>
           <button type="button" class="ghost-btn" data-action="export-csv">导出表格（.csv，可用 Excel 打开）</button>
@@ -529,7 +530,7 @@
         <input type="file" id="importFile" accept=".json,application/json" hidden>
       </section>
 
-      <section class="card">
+      ${isAndroidApp ? '' : `<section class="card">
         <h2 class="card-title">安装到手机</h2>
         <ol class="steps">
           <li>用手机浏览器打开小账本的网址（Chrome 或 Safari）。</li>
@@ -537,9 +538,9 @@
           <li>以后从桌面图标进入，像普通 App 一样使用，断网也能记账。</li>
         </ol>
         <p class="card-sub">iPhone：Safari 底部「分享」→「添加到主屏幕」。</p>
-      </section>
+      </section>`}
 
-      <p class="app-foot">小账本 v${APP_VERSION} · 本地已存 ${db.txs.length} 条记录</p>`;
+      <p class="app-foot">小账本 v${APP_VERSION} · ${isAndroidApp ? 'App 版' : '网页版'} · 本地已存 ${db.txs.length} 条记录</p>`;
   }
 
   /* =========================================================
@@ -742,6 +743,14 @@
   }
 
   function download(filename, content, type) {
+    if (isAndroidApp) {
+      try {
+        window.AndroidBridge.saveFile(filename, String(content), type || 'text/plain');
+        return;
+      } catch (err) {
+        console.warn('App 保存文件失败，改用浏览器下载', err);
+      }
+    }
     const blob = new Blob([content], { type });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -1057,6 +1066,7 @@
      启动
      ========================================================= */
   function registerSW() {
+    if (isAndroidApp) return;
     if (!('serviceWorker' in navigator)) return;
     const secure = location.protocol === 'https:'
       || location.hostname === 'localhost'
